@@ -1,11 +1,11 @@
 import EventContent from "@/components/event-detail/event-content";
 import EventLogistics from "@/components/event-detail/event-logistics";
 import EventSummary from "@/components/event-detail/event-summary";
-import ErrorAlert from "@/components/events/error-alert";
 import { getFeaturedEvents } from "@/dummy-data";
+import Comments from "@/components/input/comments";
 import { getEventById, getAllEvents } from "@/helper/api-util";
 import { Fragment } from "react";
-
+import Head from "next/head";
 
 export default function EventsDetails(props) {
 
@@ -19,11 +19,17 @@ export default function EventsDetails(props) {
 
     return (
         <Fragment>
+            <Head>
+                <title>{event.title}</title>
+                <meta name='discription'
+                    content={event.description} />
+            </Head>
             <EventSummary title={event.title} />
             <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title} />
             <EventContent>
                 <p>{event.description}</p>
             </EventContent>
+            <Comments eventId={event.id} />
         </Fragment>
     )
 
